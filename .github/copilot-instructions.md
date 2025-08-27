@@ -3,6 +3,7 @@
 # Copilot Instructions for Next.js Project
 
 This is a Next.js project with the following stack:
+
 - **Framework**: Next.js 14+ with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -12,6 +13,7 @@ This is a Next.js project with the following stack:
 - **Directory Structure**: src/ directory organization
 
 ## Code Style Guidelines
+
 - Use TypeScript for all components and utilities
 - Follow React functional component patterns with hooks
 - Use Tailwind CSS for styling (avoid inline styles when possible)
@@ -22,12 +24,14 @@ This is a Next.js project with the following stack:
 - Follow Next.js App Router conventions for routing and layout
 
 ## UI Component Usage
+
 - **shadcn/ui**: Use for buttons, cards, dialogs, forms, and modern UI elements
 - **Material-UI**: Use for data tables, complex layouts, navigation, and advanced components
 - **Theme**: Dark theme is configured for both libraries
 - **Icons**: Use Radix UI icons for consistency with shadcn/ui
 
 ## Project Structure
+
 - Components should be placed in `src/components/`
 - UI components from shadcn/ui are in `src/components/ui/`
 - Pages follow App Router structure in `src/app/`
@@ -37,6 +41,7 @@ This is a Next.js project with the following stack:
 - MUI theme configuration in `src/lib/mui-theme.ts`
 
 ## Best Practices
+
 - Use Server Components by default, Client Components when interactivity is needed
 - Implement proper SEO with metadata API
 - Use Next.js Image component for optimized images

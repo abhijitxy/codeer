@@ -35,11 +35,13 @@ A double representing the median of the two sorted arrays.
 ### Example 1
 
 **Input:**
+
 ```
 nums1 = [1,3], nums2 = [2]
 ```
 
 **Output:**
+
 ```
 2.00000
 ```
@@ -49,11 +51,13 @@ nums1 = [1,3], nums2 = [2]
 ### Example 2
 
 **Input:**
+
 ```
 nums1 = [1,2], nums2 = [3,4]
 ```
 
 **Output:**
+
 ```
 2.50000
 ```
@@ -68,20 +72,20 @@ Use binary search to find the correct partition of both arrays such that element
 def findMedianSortedArrays(nums1, nums2):
     if len(nums1) > len(nums2):
         nums1, nums2 = nums2, nums1
-    
+
     m, n = len(nums1), len(nums2)
     left, right = 0, m
-    
+
     while left <= right:
         partition1 = (left + right) // 2
         partition2 = (m + n + 1) // 2 - partition1
-        
+
         max_left1 = float('-inf') if partition1 == 0 else nums1[partition1 - 1]
         min_right1 = float('inf') if partition1 == m else nums1[partition1]
-        
+
         max_left2 = float('-inf') if partition2 == 0 else nums2[partition2 - 1]
         min_right2 = float('inf') if partition2 == n else nums2[partition2]
-        
+
         if max_left1 <= min_right2 and max_left2 <= min_right1:
             if (m + n) % 2 == 0:
                 return (max(max_left1, max_left2) + min(min_right1, min_right2)) / 2
@@ -91,7 +95,7 @@ def findMedianSortedArrays(nums1, nums2):
             right = partition1 - 1
         else:
             left = partition1 + 1
-    
+
     raise ValueError("Input arrays are not sorted")
 ```
 
@@ -100,6 +104,6 @@ Space Complexity: O(1)
 
 ---
 
-*created by expert-developer*
+_created by expert-developer_
 
-*Created with CODEER Platform*
+_Created with CODEER Platform_

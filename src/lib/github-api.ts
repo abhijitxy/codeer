@@ -1,89 +1,92 @@
 import { Octokit } from "octokit";
 
 export class GitHubAPI {
-    private octokit: Octokit;
+  private octokit: Octokit;
 
-    constructor(accessToken: string) {
-        this.octokit = new Octokit({
-            auth: accessToken,
+  constructor(accessToken: string) {
+    this.octokit = new Octokit({
+      auth: accessToken,
+    });
+  }
+
+  async createCodeerOrgDataRepo(username: string) {
+    try {
+      // Check if repository already exists
+      try {
+        await this.octokit.rest.repos.get({
+          owner: username,
+          repo: "codeer_org_data",
         });
-    }
-
-    async createCodeerOrgDataRepo(username: string) {
-        try {
-            // Check if repository already exists
-            try {
-                await this.octokit.rest.repos.get({
-                    owner: username,
-                    repo: "codeer_org_data",
-                });
-                console.log("Repository codeer_org_data already exists");
-                return { exists: true, created: false };
-            } catch (error: any) {
-                if (error.status !== 404) {
-                    throw error;
-                }
-                // Repository doesn't exist, proceed to create it
-            }
-
-            // Create the repository
-            const repo = await this.octokit.rest.repos.createForAuthenticatedUser({
-                name: "codeer_org_data",
-                description: "Codeer platform personal data storage - Auto-generated repository",
-                private: false,
-                auto_init: true, // Initialize with README
-            });
-
-            console.log("Created repository codeer_org_data");
-
-            // Wait a moment for the repository to be fully initialized
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            // Create the initial folder structure with files
-            await this.createInitialFolderStructure(username);
-
-            return { exists: false, created: true, repo };
-        } catch (error) {
-            console.error("Error creating codeer_org_data repository:", error);
-            throw error;
+        console.log("Repository codeer_org_data already exists");
+        return { exists: true, created: false };
+      } catch (error: any) {
+        if (error.status !== 404) {
+          throw error;
         }
+        // Repository doesn't exist, proceed to create it
+      }
+
+      // Create the repository
+      const repo = await this.octokit.rest.repos.createForAuthenticatedUser({
+        name: "codeer_org_data",
+        description:
+          "Codeer platform personal data storage - Auto-generated repository",
+        private: false,
+        auto_init: true, // Initialize with README
+      });
+
+      console.log("Created repository codeer_org_data");
+
+      // Wait a moment for the repository to be fully initialized
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Create the initial folder structure with files
+      await this.createInitialFolderStructure(username);
+
+      return { exists: false, created: true, repo };
+    } catch (error) {
+      console.error("Error creating codeer_org_data repository:", error);
+      throw error;
     }
+  }
 
-    private async createInitialFolderStructure(username: string) {
-        try {
-            // Create user_data/stats.json
-            const statsContent = {
-                user: {
-                    github_username: username,
-                    joined_date: new Date().toISOString(),
-                    total_problems_solved: 0,
-                    total_problems_created: 0,
-                    total_submissions: 0,
-                    languages_used: [],
-                    difficulty_stats: {
-                        easy: 0,
-                        medium: 0,
-                        hard: 0
-                    },
-                    streak: {
-                        current: 0,
-                        longest: 0,
-                        last_activity: null
-                    }
-                },
-                last_updated: new Date().toISOString()
-            };
+  private async createInitialFolderStructure(username: string) {
+    try {
+      // Create user_data/stats.json
+      const statsContent = {
+        user: {
+          github_username: username,
+          joined_date: new Date().toISOString(),
+          total_problems_solved: 0,
+          total_problems_created: 0,
+          total_submissions: 0,
+          languages_used: [],
+          difficulty_stats: {
+            easy: 0,
+            medium: 0,
+            hard: 0,
+          },
+          streak: {
+            current: 0,
+            longest: 0,
+            last_activity: null,
+          },
+        },
+        last_updated: new Date().toISOString(),
+      };
 
-            await this.octokit.rest.repos.createOrUpdateFileContents({
-                owner: username,
-                repo: "codeer_org_data",
-                path: "user_data/stats.json",
-                message: "Initialize user stats data",
-                content: Buffer.from(JSON.stringify(statsContent, null, 2)).toString("base64"),
-            });
+      await this.octokit.rest.repos.createOrUpdateFileContents({
+        owner: username,
+        repo: "codeer_org_data",
+        path: "user_data/stats.json",
+        message: "Initialize user stats data",
+        content: Buffer.from(JSON.stringify(statsContent, null, 2)).toString(
+          "base64",
+        ),
+      });
 
-            // Create problems folder with a README
-            const problemsReadme = `# Problems Directory
+      // Create problems folder with a README
+      const problemsReadme = `# Problems Directory
 
 This directory contains all the coding problems you've created on Codeer platform.
 
@@ -98,16 +101,16 @@ This directory contains all the coding problems you've created on Codeer platfor
 This repository and its structure are automatically managed by Codeer.
 `;
 
-            await this.octokit.rest.repos.createOrUpdateFileContents({
-                owner: username,
-                repo: "codeer_org_data",
-                path: "problems/README.md",
-                message: "Initialize problems directory",
-                content: Buffer.from(problemsReadme).toString("base64"),
-            });
+      await this.octokit.rest.repos.createOrUpdateFileContents({
+        owner: username,
+        repo: "codeer_org_data",
+        path: "problems/README.md",
+        message: "Initialize problems directory",
+        content: Buffer.from(problemsReadme).toString("base64"),
+      });
 
-            // Update main README
-            const mainReadme = `# Codeer Organization Data
+      // Update main README
+      const mainReadme = `# Codeer Organization Data
 
 This repository contains your personal data and problems from the Codeer coding platform.
 
@@ -123,7 +126,7 @@ codeer_org_data/
 
 ## About
 
-- **Platform**: [Codeer](${process.env.NEXTAUTH_URL || 'http://localhost:3000'}) - Open-source coding challenge platform
+- **Platform**: [Codeer](${process.env.NEXTAUTH_URL || "http://localhost:3000"}) - Open-source coding challenge platform
 - **Auto-generated**: This repository is automatically created and managed
 - **Privacy**: This repository can be public or private based on your preference
 
@@ -136,28 +139,28 @@ Your current coding statistics are tracked in \`user_data/stats.json\`.
 *This repository was automatically created by Codeer platform on ${new Date().toLocaleDateString()}*
 `;
 
-            await this.octokit.rest.repos.createOrUpdateFileContents({
-                owner: username,
-                repo: "codeer_org_data",
-                path: "README.md",
-                message: "Update main README with Codeer information",
-                content: Buffer.from(mainReadme).toString("base64"),
-            });
+      await this.octokit.rest.repos.createOrUpdateFileContents({
+        owner: username,
+        repo: "codeer_org_data",
+        path: "README.md",
+        message: "Update main README with Codeer information",
+        content: Buffer.from(mainReadme).toString("base64"),
+      });
 
-            console.log("Successfully created initial folder structure");
-        } catch (error) {
-            console.error("Error creating initial folder structure:", error);
-            throw error;
-        }
+      console.log("Successfully created initial folder structure");
+    } catch (error) {
+      console.error("Error creating initial folder structure:", error);
+      throw error;
     }
+  }
 
-    async ensureRepoExists(username: string) {
-        try {
-            const result = await this.createCodeerOrgDataRepo(username);
-            return result;
-        } catch (error) {
-            console.error("Error ensuring repo exists:", error);
-            return { exists: false, created: false, error };
-        }
+  async ensureRepoExists(username: string) {
+    try {
+      const result = await this.createCodeerOrgDataRepo(username);
+      return result;
+    } catch (error) {
+      console.error("Error ensuring repo exists:", error);
+      return { exists: false, created: false, error };
     }
+  }
 }

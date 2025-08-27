@@ -20,7 +20,7 @@ An integer representing the length of the longest substring without repeating ch
 
 ## Constraints
 
-- 0 ≤ s.length ≤ 5 * 10^4
+- 0 ≤ s.length ≤ 5 \* 10^4
 - `s` consists of English letters, digits, symbols and spaces.
 
 ## Examples
@@ -28,11 +28,13 @@ An integer representing the length of the longest substring without repeating ch
 ### Example 1
 
 **Input:**
+
 ```
 s = "abcabcbb"
 ```
 
 **Output:**
+
 ```
 3
 ```
@@ -42,11 +44,13 @@ s = "abcabcbb"
 ### Example 2
 
 **Input:**
+
 ```
 s = "bbbbb"
 ```
 
 **Output:**
+
 ```
 1
 ```
@@ -56,11 +60,13 @@ s = "bbbbb"
 ### Example 3
 
 **Input:**
+
 ```
 s = "pwwkew"
 ```
 
 **Output:**
+
 ```
 3
 ```
@@ -76,14 +82,14 @@ def lengthOfLongestSubstring(s):
     char_set = set()
     left = 0
     max_length = 0
-    
+
     for right in range(len(s)):
         while s[right] in char_set:
             char_set.remove(s[left])
             left += 1
         char_set.add(s[right])
         max_length = max(max_length, right - left + 1)
-    
+
     return max_length
 ```
 
@@ -92,6 +98,6 @@ Space Complexity: O(min(m, n)) where m is the size of the character set
 
 ---
 
-*created by developer*
+_created by developer_
 
-*Created with CODEER Platform*
+_Created with CODEER Platform_

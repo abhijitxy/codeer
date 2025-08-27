@@ -35,11 +35,13 @@ Return an array of two indices `[i, j]` where `nums[i] + nums[j] = target`.
 ### Example 1
 
 **Input:**
+
 ```
 nums = [2,7,11,15], target = 9
 ```
 
 **Output:**
+
 ```
 [0,1]
 ```
@@ -49,11 +51,13 @@ nums = [2,7,11,15], target = 9
 ### Example 2
 
 **Input:**
+
 ```
 nums = [3,2,4], target = 6
 ```
 
 **Output:**
+
 ```
 [1,2]
 ```
@@ -63,11 +67,13 @@ nums = [3,2,4], target = 6
 ### Example 3
 
 **Input:**
+
 ```
 nums = [3,3], target = 6
 ```
 
 **Output:**
+
 ```
 [0,1]
 ```
@@ -94,6 +100,6 @@ Space Complexity: O(n)
 
 ---
 
-*created by github-user*
+_created by github-user_
 
-*Created with CODEER Platform*
+_Created with CODEER Platform_
