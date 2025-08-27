@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   },
   // Performance optimizations for SEO ranking signals
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -27,59 +27,59 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },
       {
-        source: '/api/(.*)',
+        source: "/api/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=300, s-maxage=300',
+            key: "Cache-Control",
+            value: "public, max-age=300, s-maxage=300",
           },
         ],
       },
       {
-        source: '/_next/static/(.*)',
+        source: "/_next/static/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        source: '/favicon.ico',
+        source: "/favicon.ico",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400',
+            key: "Cache-Control",
+            value: "public, max-age=86400",
           },
         ],
       },
       {
-        source: '/odeer3.png',
+        source: "/odeer3.png",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400',
+            key: "Cache-Control",
+            value: "public, max-age=86400",
           },
         ],
       },

@@ -27,11 +27,13 @@ ggggggggggggggggg
 ### Example 1
 
 **Input:**
+
 ```
 gggggggggggggg
 ```
 
 **Output:**
+
 ```
 gggggggggggggg
 ```
@@ -44,4 +46,4 @@ ggggggggggggggggg
 
 ---
 
-*Created with CODEER Platform*
+_Created with CODEER Platform_
