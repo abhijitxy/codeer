@@ -169,7 +169,7 @@ export default function Home() {
                     </div>
                   </Link>
                   <Link
-                    href="https://github.com/siddu-k/codeeride"
+                    href="https://github.com/abhijitxy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors rounded-sm mx-1"
@@ -302,7 +302,7 @@ export default function Home() {
                 Terms of Service
               </Link>
               <Link
-                href="https://github.com/siddu-k/codeeride"
+                href="https://github.com/abhijitxy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 py-3 text-gray-400 hover:text-white text-sm transition-colors border-b border-gray-800 last:border-b-0"
