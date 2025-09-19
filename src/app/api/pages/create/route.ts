@@ -2,19 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {
-  CloudflareAPI,
-  validateSubdomain,
-  checkSubdomainAvailability,
-  DonatedDomainCloudflare,
-} from "@/lib/cloudflare";
-import {
   GitHubPagesAPI,
   convertFilesToUploads,
   validateWebsiteFiles,
 } from "@/lib/githubPages";
 import { pageManager } from "@/lib/pageManager";
 import { getUserByEmail } from "@/lib/userSync";
-import { donatedDomainManager } from "@/lib/donatedDomains";
 
 export async function POST(request: NextRequest) {
   try {
